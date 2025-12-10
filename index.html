@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeliBook - La Esencia de lo Casero</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-pill">D</span>
+            <div>
+                <p class="brand-name">DeliBook</p>
+                <p class="brand-tag">La esencia de lo casero</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-btn" data-go="home">Home</button>
+            <button class="nav-btn" data-go="login">Login</button>
+            <button class="nav-btn" data-go="register">Registro</button>
+            <button class="nav-btn" data-go="workspace" id="workspaceBtn" style="display: none;">Espacio</button>
+            <button class="nav-btn" data-go="logout" id="logoutBtn" style="display: none;">Logout</button>
+        </nav>
+    </header>
+
+    <main class="page">
+        <!-- Pantalla de Bienvenida / Home (Pública) -->
+        <section class="screen" data-screen="home" id="home">
+            <div class="card hero">
+                <div class="hero-text">
+                    <p class="muted">Bienvenido a</p>
+                    <h1 id="homeTitle">DELIBOOK</h1>
+                    <p class="muted">La esencia de lo casero</p>
+                    <p class="muted">Gestioná recetas, pedidos o tus notas caseras en un solo lugar.</p>
+                    <div class="hero-actions" id="homeActions">
+                        <button class="primary-btn" data-go="login">Iniciar Sesión</button>
+                        <button class="ghost-btn" data-go="register">Registrarse</button>
+                    </div>
+                </div>
+                <div class="hero-graphic">
+                    <div class="logo-oval">
+                        <svg class="curved-text" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path id="curve" d="M 50 150 Q 250 20 450 150" fill="transparent"/>
+                            <text width="500">
+                                <textPath href="#curve" startOffset="50%" text-anchor="middle">
+                                   La esencia de lo casero
+                                </textPath>
+                            </text>
+                        </svg>
+                        <h2 class="logo-title">DELIBOOK</h2>
+                    </div>
+                    <img src="assets/pescado pa proyecto.jpeg" class="logo-fish" alt="pez">
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla de Login (Pública) -->
+        <section class="screen" data-screen="login" id="login">
+            <div class="card">
+                <h2>Inicia sesión</h2>
+                <p class="muted">Accede con tu usuario y contraseña.</p>
+                <form id="loginForm" class="form-grid">
+                    <label class="form-field">
+                        <span>Usuario o Email</span>
+                        <input type="text" id="loginUser" placeholder="usuario o email" required>
+                    </label>
+                    <label class="form-field">
+                        <span>Contraseña</span>
+                        <input type="password" id="loginPass" placeholder="••••••" required>
+                    </label>
+                    <button type="submit" class="primary-btn">Entrar</button>
+                    <p class="muted small">¿No tenés cuenta? <button type="button" class="link-btn" data-go="register">Registrate</button></p>
+                    <div id="loginMsg" class="msg"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Pantalla de Registro (Pública) -->
+        <section class="screen" data-screen="register" id="register">
+            <div class="card">
+                <h2>Crear cuenta</h2>
+                <p class="muted">Registrá tus datos para usar la app.</p>
+                <form id="registerForm" class="form-grid">
+                    <label class="form-field">
+                        <span>Nombre</span>
+                        <input type="text" id="regNombre" placeholder="Nombre" required>
+                    </label>
+                    <label class="form-field">
+                        <span>Apellido</span>
+                        <input type="text" id="regApellido" placeholder="Apellido" required>
+                    </label>
+                    <label class="form-field">
+                        <span>Email</span>
+                        <input type="email" id="regEmail" placeholder="nombre@mail.com" required>
+                    </label>
+                    <label class="form-field">
+                        <span>Usuario</span>
+                        <input type="text" id="regUsuario" placeholder="usuario123" required>
+                    </label>
+                    <label class="form-field">
+                        <span>Contraseña</span>
+                        <input type="password" id="regPass" placeholder="mínimo 6 caracteres" required minlength="6">
+                    </label>
+                    <button type="submit" class="primary-btn">Registrar</button>
+                    <p class="muted small">¿Ya tenés cuenta? <button type="button" class="link-btn" data-go="login">Inicia sesión</button></p>
+                    <div id="registerMsg" class="msg"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sección Funcional Interna (Privada) -->
+        <section class="screen" data-screen="workspace" id="workspace">
+            <div class="card">
+                <h2>Espacio de trabajo</h2>
+                <p class="muted">Aquí va la actividad principal del proyecto.</p>
+                <div class="workspace-grid">
+                    <div class="workspace-panel">
+                        <h3>Tareas rápidas</h3>
+                        <ul id="notesList" class="notes"></ul>
+                        <div class="form-inline">
+                            <input type="text" id="noteInput" placeholder="Nueva nota o pedido">
+                            <button id="addNoteBtn" class="primary-btn">Agregar</button>
+                        </div>
+                    </div>
+                    <div class="workspace-panel">
+                        <h3>Usuario activo</h3>
+                        <p id="userInfo" class="muted">Sin sesión.</p>
+                        <button class="ghost-btn" data-go="logout">Cerrar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla de Logout -->
+        <section class="screen" data-screen="logout" id="logout">
+            <div class="card logout-card">
+                <h2>Cerraste sesión</h2>
+                <p class="logout-message">Hasta luego <span id="logoutName"></span>!</p>
+                <p class="muted">Gracias por usar DeliBook.</p>
+                <div class="logout-actions">
+                    <button class="primary-btn" data-go="home">Volver al inicio</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts modulares -->
+    <script src="js/storage.js"></script
