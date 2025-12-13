@@ -41,3 +41,12 @@ SPA (Single Page Application) con sistema de autenticación completo, desarrolla
 - Limpia la sesión del localStorage
 - Redirige automáticamente al inicio
 
+### Lógica del sistema:
+
+storage.js (La Memoria): Es el encargado de guardar y leer datos del navegador. Gestiona el array de usuarios y la sesión activa en el localStorage. Nadie escribe datos directamente sin pasar por acá.
+
+auth.js (La Seguridad): Contiene las reglas de negocio. Verifica si las contraseñas son correctas, valida que los emails tengan formato válido y controla que no se registren usuarios duplicados.
+
+navigation.js (El Router): Maneja el cambio de pantallas sin recargar la página (efecto SPA). También actúa como "seguridad", impidiendo que usuarios no logueados entren a secciones privadas.
+
+main.js (El Controlador): Conecta todo el sistema. Escucha los clicks del usuario (botones de login, registro, notas) y le ordena a los otros archivos qué hacer. También se encarga de mostrar la información en pantalla.
