@@ -4,83 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeliBook - La Esencia de lo Casero</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="topbar">
-        <div class="brand">
-            <span class="brand-pill">D</span>
-            <div>
-                <p class="brand-name">DeliBook</p>
-                <p class="brand-tag">La esencia de lo casero</p>
+    <!-- Pantalla de Bienvenida / Home (Pública) -->
+    <section class="screen active" data-screen="home" id="home">
+        <div class="home-container">
+            <div class="author-name">Juan Bautista Armijo</div>
+            
+            <div class="logo-container">
+                <div class="logo-oval">
+                    <div class="curved-text-top">LA ESCENCIA DE LO CASERO</div>
+                    <h1 class="logo-title">DELIBOOK</h1>
+                    <img src="img/pescado pa proyecto.jpeg" alt="Pez" class="fish-image">
+                </div>
+                <p class="company-name">by: Armijo's company</p>
             </div>
+            
+            <button class="ingresar-btn-home" data-go="login">Ingresar</button>
         </div>
-        <nav class="nav-links">
-            <button class="nav-btn" data-go="home">Home</button>
-            <button class="nav-btn" data-go="login">Login</button>
-            <button class="nav-btn" data-go="register">Registro</button>
-            <button class="nav-btn" data-go="workspace" id="workspaceBtn" style="display: none;">Espacio</button>
-            <button class="nav-btn" data-go="logout" id="logoutBtn" style="display: none;">Logout</button>
-        </nav>
-    </header>
+    </section>
 
-    <main class="page">
-        <!-- Pantalla de Bienvenida / Home (Pública) -->
-        <section class="screen" data-screen="home" id="home">
-            <div class="card hero">
-                <div class="hero-text">
-                    <p class="muted">Bienvenido a</p>
-                    <h1 id="homeTitle">DELIBOOK</h1>
-                    <p class="muted">La esencia de lo casero</p>
-                    <p class="muted">Gestioná recetas, pedidos o tus notas caseras en un solo lugar.</p>
-                    <div class="hero-actions" id="homeActions">
-                        <button class="primary-btn" data-go="login">Iniciar Sesión</button>
-                        <button class="ghost-btn" data-go="register">Registrarse</button>
-                    </div>
-                </div>
-                <div class="hero-graphic">
-                    <div class="logo-oval">
-                        <svg class="curved-text" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <path id="curve" d="M 50 150 Q 250 20 450 150" fill="transparent"/>
-                            <text width="500">
-                                <textPath href="#curve" startOffset="50%" text-anchor="middle">
-                                   La esencia de lo casero
-                                </textPath>
-                            </text>
-                        </svg>
-                        <h2 class="logo-title">DELIBOOK</h2>
-                    </div>
-                    <img src="assets/pescado pa proyecto.jpeg" class="logo-fish" alt="pez">
-                </div>
-            </div>
-        </section>
-
-        <!-- Pantalla de Login (Pública) -->
-        <section class="screen" data-screen="login" id="login">
-            <div class="card">
-                <h2>Inicia sesión</h2>
-                <p class="muted">Accede con tu usuario y contraseña.</p>
+    <!-- Pantalla de Login (Pública) -->
+    <section class="screen" data-screen="login" id="login">
+        <div class="screen-container">
+            <header class="screen-header">
+                <h1 class="main-title">LA ESCENCIA DE LO CASERO DELIBOOK</h1>
+                <p class="company-name">by: Armijo's company</p>
+            </header>
+            
+            <div class="form-container">
+                <h2>Iniciar sesión</h2>
+                <p class="form-subtitle">Accede con tu usuario o gmail</p>
                 <form id="loginForm" class="form-grid">
                     <label class="form-field">
-                        <span>Usuario o Email</span>
-                        <input type="text" id="loginUser" placeholder="usuario o email" required>
+                        <span>Usuario o E-mail</span>
+                        <input type="text" id="loginUser" placeholder="Usuario o E-mail" required>
                     </label>
                     <label class="form-field">
                         <span>Contraseña</span>
-                        <input type="password" id="loginPass" placeholder="••••••" required>
+                        <input type="password" id="loginPass" placeholder="Contraseña" required>
                     </label>
-                    <button type="submit" class="primary-btn">Entrar</button>
-                    <p class="muted small">¿No tenés cuenta? <button type="button" class="link-btn" data-go="register">Registrate</button></p>
+                    <button type="submit" class="primary-btn large">Entrar</button>
+                    <p class="form-footer">¿No tenes cuenta? <button type="button" class="link-btn" data-go="register">Regístrate</button></p>
                     <div id="loginMsg" class="msg"></div>
                 </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Pantalla de Registro (Pública) -->
-        <section class="screen" data-screen="register" id="register">
-            <div class="card">
-                <h2>Crear cuenta</h2>
-                <p class="muted">Registrá tus datos para usar la app.</p>
+    <!-- Pantalla de Registro (Pública) -->
+    <section class="screen" data-screen="register" id="register">
+        <div class="screen-container">
+            <header class="screen-header">
+                <h1 class="main-title">LA ESCENCIA DE LO CASERO DELIBOOK</h1>
+                <p class="company-name">by: Armijo's company</p>
+            </header>
+            
+            <div class="form-container">
+                <h2>Crear Cuenta</h2>
+                <p class="form-subtitle">Registrá tus datos para usar la app.</p>
                 <form id="registerForm" class="form-grid">
                     <label class="form-field">
                         <span>Nombre</span>
@@ -92,58 +75,60 @@
                     </label>
                     <label class="form-field">
                         <span>Email</span>
-                        <input type="email" id="regEmail" placeholder="nombre@mail.com" required>
+                        <input type="email" id="regEmail" placeholder="Nombre@gmail.com" required>
                     </label>
                     <label class="form-field">
                         <span>Usuario</span>
-                        <input type="text" id="regUsuario" placeholder="usuario123" required>
+                        <input type="text" id="regUsuario" placeholder="Usuario" required>
                     </label>
                     <label class="form-field">
                         <span>Contraseña</span>
-                        <input type="password" id="regPass" placeholder="mínimo 6 caracteres" required minlength="6">
+                        <input type="password" id="regPass" placeholder="Minimo 6 caracteres" required minlength="6">
                     </label>
-                    <button type="submit" class="primary-btn">Registrar</button>
-                    <p class="muted small">¿Ya tenés cuenta? <button type="button" class="link-btn" data-go="login">Inicia sesión</button></p>
+                    <button type="submit" class="primary-btn large">Registrar</button>
+                    <p class="form-footer">¿Ya tenés cuenta? <button type="button" class="link-btn" data-go="login">Inicia sesión</button></p>
                     <div id="registerMsg" class="msg"></div>
                 </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Sección Funcional Interna (Privada) -->
-        <section class="screen" data-screen="workspace" id="workspace">
-            <div class="card">
-                <h2>Espacio de trabajo</h2>
-                <p class="muted">Aquí va la actividad principal del proyecto.</p>
-                <div class="workspace-grid">
-                    <div class="workspace-panel">
-                        <h3>Tareas rápidas</h3>
-                        <ul id="notesList" class="notes"></ul>
-                        <div class="form-inline">
-                            <input type="text" id="noteInput" placeholder="Nueva nota o pedido">
-                            <button id="addNoteBtn" class="primary-btn">Agregar</button>
-                        </div>
-                    </div>
-                    <div class="workspace-panel">
-                        <h3>Usuario activo</h3>
-                        <p id="userInfo" class="muted">Sin sesión.</p>
-                        <button class="ghost-btn" data-go="logout">Cerrar sesión</button>
-                    </div>
+    <!-- Sección Funcional Interna (Privada) -->
+    <section class="screen" data-screen="workspace" id="workspace">
+        <div class="screen-container workspace-screen">
+            <header class="screen-header">
+                <h1 class="main-title">LA ESCENCIA DE LO CASERO DELIBOOK</h1>
+                <p class="company-name">by: Armijo's company</p>
+            </header>
+            
+            <button class="logout-btn" data-go="logout">Cerrar sesión</button>
+            
+            <div class="workspace-container">
+                <h2 class="welcome-user">Bienvenido <span id="workspaceUserName"></span> a tu página de trabajo.</h2>
+                <div class="workspace-content" id="workspaceContent">
+                    <!-- Aquí se agregará la funcionalidad en clase (calendario, lista de tareas, etc.) -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Pantalla de Logout -->
-        <section class="screen" data-screen="logout" id="logout">
-            <div class="card logout-card">
-                <h2>Cerraste sesión</h2>
-                <p class="logout-message">Hasta luego <span id="logoutName"></span>!</p>
-                <p class="muted">Gracias por usar DeliBook.</p>
-                <div class="logout-actions">
-                    <button class="primary-btn" data-go="home">Volver al inicio</button>
+    <!-- Pantalla de Logout -->
+    <section class="screen" data-screen="logout" id="logout">
+        <div class="logout-modal-overlay">
+            <div class="logout-modal">
+                <p class="logout-question">Deseas cerrar sesión</p>
+                <div class="logout-buttons">
+                    <button class="confirm-btn" id="confirmLogout">SI</button>
+                    <button class="confirm-btn" data-go="workspace">NO</button>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Scripts modulares -->
-    <script src="js/storage.js"></script
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
