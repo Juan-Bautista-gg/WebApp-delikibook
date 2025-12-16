@@ -41,3 +41,39 @@ SPA (Single Page Application) con sistema de autenticación completo, desarrolla
 - Limpia la sesión del localStorage
 - Redirige automáticamente al inicio
  
+**Usuarios:**
+```javascript
+localStorage.getItem("usuariosDeliBook")
+// Array de objetos: [{ nombre, apellido, email, usuario, pass }, ...]
+```
+
+**Sesión:**
+```javascript
+localStorage.getItem("sesionDeliBook")
+// Objeto: { isLogged: true, username: "ejemplo" }
+```
+
+### Usuarios Pre-cargados
+
+El sistema incluye 3 usuarios de prueba:
+- **Usuario:** tomas | **Email:** tomas@mail.com | **Contraseña:** 123456
+- **Usuario:** maria | **Email:** maria@mail.com | **Contraseña:** password123
+- **Usuario:** juan | **Email:** juan@mail.com | **Contraseña:** clave123
+
+##  Diseño
+
+- Diseño moderno y limpio
+- Paleta de colores azul suave
+- Completamente responsivo (móvil y desktop)
+- Animaciones suaves
+- Tipografía legible
+- Botones accesibles y bien dimensionados
+
+
+
+##  Responsive Design
+
+La aplicación se adapta perfectamente a:
+-  Móviles (320px+)
+-  Tablets (768px+)
+-  Desktop (1024px+)
