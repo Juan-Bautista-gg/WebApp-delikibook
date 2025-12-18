@@ -1,35 +1,29 @@
 // ===== Aplicación Principal DeliBook =====
 
-// Selectores
+// ================= SELECTORES =================
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const loginMsg = document.getElementById("loginMsg");
 const registerMsg = document.getElementById("registerMsg");
 const workspaceUserName = document.getElementById("workspaceUserName");
 const confirmLogout = document.getElementById("confirmLogout");
-const workspaceContent = document.getElementById("workspaceContent");
+const logoutBtn = document.querySelector(".logout-btn");
 
-// ===== Funciones de UI =====
-// Renderizar información del usuario
+// ================= UI =================
 function renderUserInfo(user) {
     if (!user) {
-        if (workspaceUserName) workspaceUserName.textContent = "";
+        workspaceUserName.textContent = "";
         return;
     }
-
-    if (workspaceUserName) {
-        workspaceUserName.textContent = user.nombre;
-    }
+    workspaceUserName.textContent = user.nombre;
 }
 
-// Mostrar mensaje en un contenedor
 function showMessage(element, message, type = "error") {
     if (!element) return;
     element.textContent = message;
     element.className = `msg ${type}`;
 }
 
-// Limpiar mensaje
 function clearMessage(element) {
     if (element) {
         element.textContent = "";
@@ -37,13 +31,11 @@ function clearMessage(element) {
     }
 }
 
-// ===== Inicializar usuarios por defecto =====
+// ================= INIT APP =================
 initDefaultUsers();
-
-// ===== Inicializar navegación =====
 initNavigation();
 
-// ===== Registro de usuario =====
+// ================= REGISTRO =================
 if (registerForm) {
     registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -56,74 +48,144 @@ if (registerForm) {
         const pass = document.getElementById("regPass").value.trim();
 
         const result = registerUser(nombre, apellido, email, usuario, pass);
-        
+
         if (result.success) {
             showMessage(registerMsg, result.message, "success");
             registerForm.reset();
-            setTimeout(() => {
-                navigateTo("login");
-            }, 1500);
+            setTimeout(() => navigateTo("login"), 1500);
         } else {
-            showMessage(registerMsg, result.message, "error");
+            showMessage(registerMsg, result.message);
         }
     });
 }
 
-// ===== Login =====
+// ================= LOGIN =================
 if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         clearMessage(loginMsg);
 
         const identifier = document.getElementById("loginUser").value.trim();
-        const loginPass = document.getElementById("loginPass").value.trim();
-        
-        const result = performLogin(identifier, loginPass);
-        
+        const loginPassValue = document.getElementById("loginPass").value.trim();
+
+        const result = performLogin(identifier, loginPassValue);
+
         if (result.success) {
             renderUserInfo(result.user);
             loginForm.reset();
             navigateTo("workspace");
+            initTasks();
         } else {
-            showMessage(loginMsg, result.message, "error");
+            showMessage(loginMsg, result.message);
         }
     });
 }
 
-// ===== Logout =====
+// ================= LOGOUT =================
 function handleLogout() {
-    // Solo navegar a la pantalla de confirmación
     navigateTo("logout");
 }
 
-// Confirmar logout (cuando presiona SI)
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", handleLogout);
+}
+
 function confirmLogoutAction() {
     clearSession();
     renderUserInfo(null);
     navigateTo("home");
 }
 
-// Inicializar botón de confirmación de logout
 if (confirmLogout) {
     confirmLogout.addEventListener("click", confirmLogoutAction);
 }
 
-// ===== Estado inicial =====
+// ================= ESTADO INICIAL =================
 function init() {
     const user = getCurrentUser();
     renderUserInfo(user);
-    
-    // Verificar si hay sesión activa
+
     if (user) {
         navigateTo("workspace");
+        initTasks();
     } else {
-        navigateTo("home"); // Mostrar home público primero
+        navigateTo("home");
     }
 }
 
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
 } else {
     init();
 }
+
+// =================================================
+// =============== LISTA DE TAREAS =================
+// =================================================
+
+let tasks = [];
+let currentUserKey = null;
+
+function initTasks() {
+    const taskInput = document.getElementById("taskInput");
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskList = document.getElementById("taskList");
+
+    if (!taskInput || !addTaskBtn || !taskList) return;
+
+    const user = getCurrentUser();
+    if (!user) return;
+
+    currentUserKey = `tasks_${user.usuario}`;
+    tasks = JSON.parse(localStorage.getItem(currentUserKey)) || [];
+
+    renderTasks(taskList);
+
+    addTaskBtn.onclick = () => {
+        const text = taskInput.value.trim();
+        if (text === "") return;
+
+        tasks.push({ text, completed: false });
+        saveTasks();
+        renderTasks(taskList);
+        taskInput.value = "";
+    };
+}
+
+function renderTasks(taskList) {
+    taskList.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.textContent = task.text;
+
+        if (task.completed) {
+            li.style.textDecoration = "line-through";
+        }
+
+        li.addEventListener("click", () => {
+            tasks[index].completed = !tasks[index].completed;
+            saveTasks();
+            renderTasks(taskList);
+        });
+
+        const btn = document.createElement("button");
+        btn.textContent = "X";
+
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks(taskList);
+        });
+
+        li.appendChild(btn);
+        taskList.appendChild(li);
+    });
+}
+
+function saveTasks() {
+    if (!currentUserKey) return;
+    localStorage.setItem(currentUserKey, JSON.stringify(tasks));
+}
+

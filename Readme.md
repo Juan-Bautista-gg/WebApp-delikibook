@@ -4,42 +4,65 @@ SPA (Single Page Application) con sistema de autenticación completo, desarrolla
 
 ## Características
 
--  Sistema de registro y login completo
--  Validaciones de formularios (email, duplicados, contraseña)
--  Control de acceso a secciones privadas
--  Diseño completamente responsivo
--  Código modular y organizado
--  LocalStorage estructurado
--  Usuarios pre-cargados para pruebas
-##  Pantallas Implementadas
+- Sistema de registro y login completo
+- Validaciones de formularios (email, duplicados, contraseña)
+- Control de acceso a secciones privadas
+- Diseño completamente responsivo
+- Código modular y organizado (HTML / CSS / JS separados)
+- LocalStorage estructurado y persistente
+- Usuarios pre-cargados para pruebas
+- SPA (Single Page Application) sin recarga de página
+- Gestión de estado de sesión
+- Lista de tareas personalizada por usuario
+- Persistencia de tareas por usuario activo
+- Limpieza automática de tareas al cambiar de usuario
+
+## Pantallas Implementadas
 
 ### 1. Home / Bienvenida (Pública)
 - Logo y nombre de la aplicación
 - Botones de acceso: "Iniciar Sesión" y "Registrarse"
-- Cuando hay sesión activa, muestra saludo personalizado
+- Navegación SPA mediante botones
+- Si hay sesión activa, redirige automáticamente al workspace
 
 ### 2. Registro (Pública)
 - Formulario completo con validaciones:
-  - Nombre y apellido
-  - Email (validación de formato)
-  - Usuario (verificación de duplicados)
-  - Contraseña (mínimo 6 caracteres)
+  - Nombre y apellido obligatorios
+  - Email con validación de formato
+  - Usuario con verificación de duplicados
+  - Contraseña con mínimo de 6 caracteres
+- Mensajes de error y éxito visibles
+- Redirección automática al login al registrarse
 
 ### 3. Login (Pública)
-- Formulario de usuario/email y contraseña
+- Acceso mediante usuario o email
 - Validación de credenciales
 - Mensajes de error claros
+- Al iniciar sesión:
+  - Se guarda la sesión en LocalStorage
+  - Se carga el workspace del usuario
+  - Se inicializa la lista de tareas personal
 
-### 4. Espacio de Trabajo (Privada)
-- Requiere sesión activa
-- Muestra información del usuario
-- Botón de logout visible
-- Lista de notas rápidas
+### 4. Workspace / Dashboard (Privada)
+- Acceso restringido a usuarios logueados
+- Muestra el nombre del usuario activo
+- Botón visible de cerrar sesión
+- Lista de tareas (To-Do List):
+  - Agregar tareas (no permite tareas vacías)
+  - Marcar tareas como completadas (tachado)
+  - Eliminar tareas individualmente
+  - Persistencia automática en LocalStorage
+  - Las tareas se guardan por usuario
+  - Cada usuario tiene su propia lista independiente
 
 ### 5. Logout
-- Mensaje personalizado con nombre del usuario
-- Limpia la sesión del localStorage
-- Redirige automáticamente al inicio
+- Pantalla de confirmación de cierre de sesión
+- Limpia completamente la sesión activa
+- No elimina usuarios registrados
+- Al cerrar sesión:
+  - Se mantiene la información de tareas del usuario
+  - Al iniciar sesión con otro usuario se cargan sus propias tareas
+- Redirección automática al Home público
  
 **Usuarios:**
 ```javascript
